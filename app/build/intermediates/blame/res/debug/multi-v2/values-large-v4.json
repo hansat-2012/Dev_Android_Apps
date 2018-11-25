@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/todayo/hansat/github/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
+            "outputFile": "D:\\dev\\AndroidStudioProjects\\Dev_Android_Apps\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
-                    "source": "/Users/todayo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f73331fa080f8f5c1016528b71c98785/res/values-large-v4/values-large-v4.xml",
+                    "source": "C:\\Users\\root\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\64d70f2f6e3d31f689dc1a2fbf1422a1\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
