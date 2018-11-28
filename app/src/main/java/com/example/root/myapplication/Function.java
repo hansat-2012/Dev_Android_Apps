@@ -1,13 +1,13 @@
 package com.example.root.myapplication;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.widget.TextView;
 
 /*
 *   途中計算式を表示するクラス
  */
 
-public class Function extends AppCompatActivity {
+public class Function extends Activity {
     private String m_formula = null;
     private boolean m_bCalcLast = false;     //直近の入力が演算式である
     private static final int LIMIT = 20;    // Function欄の最大文字数を20文字とする
