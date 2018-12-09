@@ -29,6 +29,8 @@ public class Function extends Activity {
     * 1 : -
     * 2 : *
     * 3 : /
+    * 3 : =
+    * 3 : .
      */
     public void setCalc(int calc) {
         if(calc < 0 || 4 < calc) {
