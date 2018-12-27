@@ -19,7 +19,7 @@ public class Function extends Activity {
         if( LIMIT < m_formula.length()){    //表示しきれない場合
             return;
         }
-        m_formula += num;
+        m_formula += String.valueOf(num);
         m_bCalcLast = false;
         Redraw();
     }
@@ -29,11 +29,11 @@ public class Function extends Activity {
     * 1 : -
     * 2 : *
     * 3 : /
-    * 3 : =
-    * 3 : .
+    * 4 : =
+    * 5 : .
      */
     public void setCalc(int calc) {
-        if(calc < 0 || 4 < calc) {
+        if(calc < 0 || 5 < calc) {
             return;
         }
         if( LIMIT < m_formula.length()){
@@ -43,7 +43,30 @@ public class Function extends Activity {
         if(m_bCalcLast) {
             m_formula = m_formula.substring(0,m_formula.length()-1);
         }
-        m_formula += calc;
+        char c;
+        switch(calc) {
+            case 0:
+                c = '+';
+                break;
+            case 1:
+                c = '-';
+                break;
+            case 2:
+                c = '*';
+                break;
+            case 3:
+                c = '/';
+                break;
+            case 4:
+                c = '=';
+                break;
+            case 5:
+                c = '.';
+                break;
+            default:
+                return;
+        }
+        m_formula += c;
         m_bCalcLast = true;
         Redraw();
     }
