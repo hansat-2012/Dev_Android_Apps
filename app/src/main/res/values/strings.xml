@@ -1,3 +1,22 @@
 <resources>
+    <string name="textView2">Result</string>
+    <string name="textView4">Function</string>
+    <string name="button0_label">0</string>
+    <string name="button1_label">1</string>
+    <string name="button2_label">2</string>
+    <string name="button3_label">3</string>
+    <string name="button4_label">4</string>
+    <string name="button5_label">5</string>
+    <string name="button6_label">6</string>
+    <string name="button7_label">7</string>
+    <string name="button8_label">8</string>
+    <string name="button9_label">9</string>
+    <string name="button_equ">=</string>
+    <string name="button_plu">+</string>
+    <string name="button_min">-</string>
+    <string name="button_mul">*</string>
+    <string name="button_div">/</string>
+    <string name="button_dot">.</string>
     <string name="app_name">My Application</string>
+
 </resources>
