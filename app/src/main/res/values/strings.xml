@@ -14,7 +14,7 @@
     <string name="btn_9">9</string>
     <string name="btn_equ">=</string>
     <string name="btn_plu">+</string>
-    <string name="byn_min">-</string>
+    <string name="btn_min">-</string>
     <string name="btn_mul">*</string>
     <string name="btn_div">/</string>
     <string name="btn_dot">.</string>
