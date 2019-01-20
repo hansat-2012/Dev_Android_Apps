@@ -10,7 +10,6 @@ public class StringBuffer {
 
     // Member:
     public String m_StrIn[ /* BUF_TOKEN_SIZE */ ] ;        // Input token
-    //public int m_StrLength[] ;        // Input length of each tokenes
     public int m_TokenNum = 0 ;        // Input number of tokenes
     public int m_flg_EndOfToken ;   // Token Period
 	public String tmp_Str ;
@@ -39,8 +38,8 @@ public class StringBuffer {
             else if(tmp_num == 12) tmp_Char = '*' ;
             else if(tmp_num == 13) tmp_Char = '/' ;
             else if(tmp_num == 14) tmp_Char = '.' ;
-            //else if(tmp_num == 15) tmp_Char = '(';
-            //else if(tmp_num == 16) tmp_Char = ')';
+            else if(tmp_num == 15) tmp_Char = '(';
+            else if(tmp_num == 16) tmp_Char = ')';
             //else eUnknownInput = 1;
 
 
@@ -58,7 +57,6 @@ public class StringBuffer {
         if( m_flg_EndOfToken == 1 )
         {
 			m_StrIn[ m_TokenNum ] = tmp_Str ;
-            //m_StrLength[ m_TokenNum ] ++ ;
             m_TokenNum ++;
             tmp_Str = "" ;
             m_flg_EndOfToken = 0 ;

@@ -88,7 +88,8 @@ public class GenPolishStr extends Activity {
                                             /* スタックからポップ */
                                             /* それをバッファへ */
 
-                                        } else    // スタック最上段演算子 > トークン演算子　・・・A
+                                        }
+                                        else    // スタック最上段演算子 > トークン演算子　・・・A
                                         {
                                             m_Stack += String.valueOf( m_Token );    //トークンをスタックに追加
                                             m_Exit = true;
