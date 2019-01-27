@@ -72,7 +72,7 @@ public class Function extends Activity {
     }
 
     private void Redraw(){
-        TextView display = findViewById(R.id.textView4);
+        TextView display = findViewById(R.id.txt_function);
         display.setText(m_formula);
     }
 }
