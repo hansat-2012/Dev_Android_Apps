@@ -20,100 +20,112 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="369dp"
-        android:layout_height="73dp"
+        android:layout_height="69dp"
         android:text="@string/textView2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        tools:layout_editor_absoluteX="7dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="7dp" />
 
     <Button
         android:id="@+id/button_equ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_equ"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button_dot"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965"
-        tools:layout_editor_absoluteX="201dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/button_plu"
-        android:layout_width="81dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_plu"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button_equ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965"
-        tools:layout_editor_absoluteX="295dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/button_min"
-        android:layout_width="81dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_min"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863"
-        tools:layout_editor_absoluteX="295dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <Button
         android:id="@+id/button_mul"
-        android:layout_width="81dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:text="@string/button_mul"
+        app:layout_constraintStart_toEndOf="@+id/button9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656"
-        tools:layout_editor_absoluteX="295dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_div"
-        android:layout_width="81dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_div"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"
-        tools:layout_editor_absoluteX="295dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <Button
         android:id="@+id/button_dot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_dot"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965"
-        tools:layout_editor_absoluteX="105dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/button0"
+        layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button0_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.965"
-        tools:layout_editor_absoluteX="7dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button1"
+        layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button1_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863"
-        tools:layout_editor_absoluteX="7dp"
+        app:layout_constraintVertical_bias="0.861"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -121,32 +133,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button2_label"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863"
-        tools:layout_editor_absoluteX="105dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button3_label"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863"
-        tools:layout_editor_absoluteX="201dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        layout_constraintStart_toStartOf="parent"
         android:text="@string/button4_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76"
-        tools:layout_editor_absoluteX="7dp"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -154,54 +170,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button5_label"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"
-        tools:layout_editor_absoluteX="105dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button6_label"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"
-        tools:layout_editor_absoluteX="201dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <Button
         android:id="@+id/button7"
+        layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button7_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656"
-        tools:layout_editor_absoluteX="7dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:text="@string/button8_label"
+        app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656"
-        tools:layout_editor_absoluteX="105dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:text="@string/button9_label"
+        app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656"
-        tools:layout_editor_absoluteX="201dp"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
