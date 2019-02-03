@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.widget.TextView;
 
 /*
-*   途中計算式を表示するクラス
+ *   途中計算式を表示するクラス
  */
 
 public class Function extends Activity {

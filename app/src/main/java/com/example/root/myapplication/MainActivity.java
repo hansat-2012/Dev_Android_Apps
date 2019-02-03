@@ -10,6 +10,7 @@ public class MainActivity extends Activity {
 
     // Instance
     private Function m_func;
+    private StringBuffer m_buf ;
 
     // button action
     @Override
@@ -24,6 +25,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(0);
+                m_buf.saveToken(0);
+
             }
         });
 
@@ -33,6 +36,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(1);
+                m_buf.saveToken(1);
+
             }
         });
 
@@ -42,6 +47,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(2);
+                m_buf.saveToken(2);
+
             }
         });
 
@@ -51,6 +58,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(3);
+                m_buf.saveToken(3);
+
             }
         });
 
@@ -60,6 +69,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(4);
+                m_buf.saveToken(4);
+
             }
         });
 
@@ -69,6 +80,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(5);
+                m_buf.saveToken(5);
+
             }
         });
 
@@ -78,6 +91,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(6);
+                m_buf.saveToken(6);
+
             }
         });
 
@@ -87,6 +102,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(7);
+                m_buf.saveToken(7);
+
             }
         });
 
@@ -96,6 +113,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(8);
+                m_buf.saveToken(8);
+
             }
         });
 
@@ -105,6 +124,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setNum(9);
+                m_buf.saveToken(9);
+
             }
         });
 
@@ -114,6 +135,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(0);
+                m_buf.saveToken(10);
+
             }
         });
 
@@ -123,6 +146,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(1);
+                m_buf.saveToken(11);
+
             }
         });
 
@@ -132,6 +157,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(2);
+                m_buf.saveToken(12);
+
             }
         });
 
@@ -141,6 +168,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(3);
+                m_buf.saveToken(13);
+
             }
         });
 
@@ -151,6 +180,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(4);
+                m_buf.resetToken(); // Trigger of Reset m_buf
+
             }
         });
 
@@ -160,6 +191,8 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(5);
+                m_buf.saveToken(14);
+                //m_buf[m_buf.m_TokenLength]
             }
         });
 
