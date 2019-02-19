@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Calculator</string>
     <string name="bar_result">Result</string>
-    <string name="bar_function">Function</string>
+    <string name="btn_clear">C</string>
     <string name="btn_0">0</string>
     <string name="btn_1">1</string>
     <string name="btn_2">2</string>
