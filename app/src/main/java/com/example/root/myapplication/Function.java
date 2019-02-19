@@ -21,7 +21,6 @@ public class Function extends Activity {
         }
         m_formula += String.valueOf(num);
         m_bCalcLast = false;
-        Redraw();
     }
 
     /*
@@ -68,11 +67,5 @@ public class Function extends Activity {
         }
         m_formula += c;
         m_bCalcLast = true;
-        Redraw();
-    }
-
-    private void Redraw(){
-        TextView display = findViewById(R.id.txt_function);
-        display.setText(m_formula);
     }
 }

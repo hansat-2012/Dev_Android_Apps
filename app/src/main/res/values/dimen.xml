@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="num_btn_height">70dp</dimen>
-    <dimen name="num_btn_width">100dp</dimen>
-    <dimen name="num_btn_margin">10dp</dimen>
+    <dimen name="result_height">75</dimen>
+    <dimen name="result_width">370</dimen>
+    <dimen name="btn_height">70dp</dimen>
+    <dimen name="btn_width">100dp</dimen>
+    <dimen name="btn_margin">10dp</dimen>
 </resources>
