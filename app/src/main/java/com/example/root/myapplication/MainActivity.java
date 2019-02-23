@@ -3,6 +3,7 @@ package com.example.root.myapplication;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 /*test*/
 
@@ -196,6 +197,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        //button_clear
+        findViewById(R.id.button_cleaer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View n) {
+                // クリック時の処理
+                TextView result = findViewById(R.id.txt_result);
+                result.setText("");
+            }
+        });
 
     }
 
