@@ -12,6 +12,8 @@ public class MainActivity extends Activity {
     // Instance
     private Function m_func;
     private StringBuffer m_buf ;
+    private Convert m_inputtoken ;
+    private RpnCalculator m_convertedtoken ;
 
     // button action
     @Override
@@ -19,6 +21,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         m_func = new Function();
+        m_buf = new StringBuffer();
+        m_inputtoken = new Convert();
+        m_convertedtoken = new RpnCalculator();
 
         // button0
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
@@ -181,7 +186,10 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_func.setCalc(4);
+                m_buf.saveToken(17);
                 m_buf.resetToken(); // Trigger of Reset m_buf
+//                m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
+
 
             }
         });
