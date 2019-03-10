@@ -9,7 +9,7 @@ public class StringBuffer {
     static int BUF_TOKEN_SIZE = 20 ;     // Function欄の最大文字数を20文字とする
 
     // Member:
-    public String m_StrIn[ /* BUF_TOKEN_SIZE */ ] ;        // Input token
+    public String[] m_StrIn = new String[  BUF_TOKEN_SIZE  ] ;        // Input token
     public int m_TokenNum = 0 ;        // Input number of tokenes
     public int m_flg_EndOfToken ;   // Token Period
 	public String tmp_Str ;
