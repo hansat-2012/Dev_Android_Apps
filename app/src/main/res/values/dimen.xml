@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="result_height">75</dimen>
-    <dimen name="result_width">370</dimen>
+    <dimen name="result_height">75dp</dimen>
+    <dimen name="result_width">370dp</dimen>
     <dimen name="btn_height">70dp</dimen>
     <dimen name="btn_width">100dp</dimen>
     <dimen name="btn_margin">10dp</dimen>
