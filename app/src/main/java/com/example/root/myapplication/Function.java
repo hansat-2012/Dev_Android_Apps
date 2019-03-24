@@ -8,7 +8,7 @@ import android.widget.TextView;
  */
 
 public class Function extends Activity {
-    private String m_formula = null;
+    private String m_formula = "";
     private boolean m_bCalcLast = false;     //直近の入力が演算式である
     private static final int LIMIT = 20;    // Function欄の最大文字数を20文字とする
 

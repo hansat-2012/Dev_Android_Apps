@@ -3,7 +3,7 @@ package com.example.root.myapplication;
 public class Convert {
     //#define STACK_MAX  100
     static int STACK_MAX = 100;
-    char stack[ /*STACK_MAX*/ ];
+    char[] stak = new  char[ STACK_MAX ];
     int   stack_pointer = 0;
 
     String convert(StringBuffer token ) {
