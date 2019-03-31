@@ -1,6 +1,7 @@
 package com.example.root.myapplication;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,25 +15,30 @@ public class MainActivity extends Activity {
     private StringBuffer m_buf ;
     private Convert m_inputtoken ;
     private RpnCalculator m_convertedtoken ;
+    private TextView m_txtResult;
+    private String m_dispStr; //リザルトバーに表示するようの文字列
 
     // button action
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         m_func = new Function();
         m_buf = new StringBuffer();
         m_inputtoken = new Convert();
         m_convertedtoken = new RpnCalculator();
-
+        m_txtResult = findViewById(R.id.txt_result);
+        m_txtResult.setText("0");
+        m_dispStr = "";
         // button0
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(0);
                 m_func.setNum(0);
                 m_buf.saveToken(0);
-
             }
         });
 
@@ -41,6 +47,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(1);
                 m_func.setNum(1);
                 m_buf.saveToken(1);
 
@@ -52,6 +59,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(2);
                 m_func.setNum(2);
                 m_buf.saveToken(2);
 
@@ -63,6 +71,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(3);
                 m_func.setNum(3);
                 m_buf.saveToken(3);
 
@@ -74,6 +83,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(4);
                 m_func.setNum(4);
                 m_buf.saveToken(4);
 
@@ -85,6 +95,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(5);
                 m_func.setNum(5);
                 m_buf.saveToken(5);
 
@@ -96,6 +107,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(6);
                 m_func.setNum(6);
                 m_buf.saveToken(6);
 
@@ -107,6 +119,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(7);
                 m_func.setNum(7);
                 m_buf.saveToken(7);
 
@@ -118,6 +131,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(8);
                 m_func.setNum(8);
                 m_buf.saveToken(8);
 
@@ -129,6 +143,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(9);
                 m_func.setNum(9);
                 m_buf.saveToken(9);
 
@@ -140,6 +155,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                showNum(0); //TODO:0が続けて表示されたりしないようにする
                 m_func.setCalc(0);
                 m_buf.saveToken(10);
 
@@ -210,12 +226,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                TextView result = findViewById(R.id.txt_result);
-                result.setText("");
+                m_dispStr = "";
+                m_txtResult.setText(m_dispStr);
             }
         });
-
     }
 
+    void showNum(int num){
+        m_dispStr += String.valueOf(num);
+        m_txtResult.setText(m_dispStr);
+    }
 }
 
