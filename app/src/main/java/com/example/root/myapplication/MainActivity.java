@@ -155,7 +155,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                showNum(0); //TODO:0が続けて表示されたりしないようにする
                 m_func.setCalc(0);
                 m_buf.saveToken(10);
 
