@@ -1,5 +1,8 @@
 package com.example.root.myapplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Convert {
     //#define STACK_MAX  100
     static int STACK_MAX = 100;
@@ -8,8 +11,10 @@ public class Convert {
 
     String convert(StringBuffer token ) {
         int n;
-        char pToken = ' ' ;
+        String pToken = "" ;
         String buffer = null ;        // 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
+        List<String> buffer_list = new ArrayList<String>();
+
 
         for (n = 0; n < token.m_TokenNum; n++) {
             if ( isdigit( token.m_StrIn[n] ) ) {
@@ -18,22 +23,23 @@ public class Convert {
 
             } else if ( token.m_StrIn[n] == ")") {
                 // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
-                while ( (pToken = pop() ) != ' ' && pToken != '(')
+                while ( (pToken = pop() ) != "" && pToken != "(")
                     buffer += pToken;
 
-                if (pToken == ' ' ) error("'(' がない");
+                if (pToken == "" ) error("'(' がない");
 
             } else if ( token.m_StrIn[n] == "(" ) {
                 push( token.m_StrIn[n] );
 
-            } else if (peek() == ' ') {
+            } else if (peek() == "") {
                 push( token.m_StrIn[n] );
 
             } else {
-                while (peek() != ' ') {
+                while (peek() != "") {
                     if ( rank( token.m_StrIn[n] , peek() ) == 1 ) {
                         // 現在のトークンはスタック最上位のトークンより優先順位が低い
                        buffer += pop();
+                       buffer_list.add(pop());
 
                     } else {
                         push( token.m_StrIn[n] );
@@ -45,7 +51,7 @@ public class Convert {
         }
 
         // スタックが空になるまでトークンを取り出し、バッファへ
-        while ( (pToken = pop()) != ' ') {
+        while ( (pToken = pop()) != "") {
             buffer += pToken;
         }
         buffer = null;
@@ -72,17 +78,17 @@ public class Convert {
     }
 
     // スタックから１トークン取り出す
-    char pop() {
-        return stack_pointer > 0 ? stack[--stack_pointer] : ' ';
+    String pop() {
+        return stack_pointer > 0 ? String.valueOf(stack[--stack_pointer]) : "" ;
     }
 
     // 最後にスタックに入ったトークンを返す
-    char peek() {
-        return stack_pointer > 0 ? stack[stack_pointer-1] : ' ';
+    String peek() {
+        return stack_pointer > 0 ?  String.valueOf(stack[stack_pointer-1]) : "";
     }
 
     // 演算子の優先順位を返す
-    int rank(String op_a, char op_b) {
+    int rank(String op_a, String op_b) {
         int a = 0;
         int b = 0;
 
@@ -90,9 +96,9 @@ public class Convert {
         if (op_a == "*" || op_a == "/" || op_a == "%") a = 4;
         if (op_a == "+" || op_a == "-") a = 5;
 
-        if (op_b == '(' || op_b == ')') b = 1;
-        if (op_b == '*' || op_b == '/' || op_b == '%') b = 4;
-        if (op_b == '+' || op_b == '-') b = 5;
+        if (op_b == "(" || op_b == ")") b = 1;
+        if (op_b == "*" || op_b == "/" || op_b == "%") b = 4;
+        if (op_b == "+" || op_b == "-") b = 5;
 
         return (a < b )? 1: 0;
     }
