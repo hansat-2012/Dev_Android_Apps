@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
     private TextView m_txtResult;
     private String m_dispStr; //リザルトバーに表示するようの文字列
 
+    private boolean m_bZero;    //表示されている値が0
+
     // button action
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +32,13 @@ public class MainActivity extends Activity {
         m_convertedtoken = new RpnCalculator();
         m_txtResult = findViewById(R.id.txt_result);
         m_txtResult.setText("0");
-        m_dispStr = "";
+        m_dispStr = "0";
+        m_bZero = true;
         // button0
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(0);
-                m_func.setNum(0);
-                m_buf.saveToken(0);
+                clickNum(0);
             }
         });
 
@@ -46,11 +46,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(1);
-                m_func.setNum(1);
-                m_buf.saveToken(1);
-
+                clickNum(1);
             }
         });
 
@@ -58,11 +54,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(2);
-                m_func.setNum(2);
-                m_buf.saveToken(2);
-
+                clickNum(2);
             }
         });
 
@@ -70,11 +62,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(3);
-                m_func.setNum(3);
-                m_buf.saveToken(3);
-
+                clickNum(3);
             }
         });
 
@@ -82,11 +70,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(4);
-                m_func.setNum(4);
-                m_buf.saveToken(4);
-
+                clickNum(4);
             }
         });
 
@@ -94,11 +78,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(5);
-                m_func.setNum(5);
-                m_buf.saveToken(5);
-
+                clickNum(5);
             }
         });
 
@@ -106,11 +86,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(6);
-                m_func.setNum(6);
-                m_buf.saveToken(6);
-
+                clickNum(6);
             }
         });
 
@@ -118,11 +94,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(7);
-                m_func.setNum(7);
-                m_buf.saveToken(7);
-
+                clickNum(7);
             }
         });
 
@@ -130,11 +102,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(8);
-                m_func.setNum(8);
-                m_buf.saveToken(8);
-
+                clickNum(8);
             }
         });
 
@@ -142,11 +110,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                // クリック時の処理
-                showNum(9);
-                m_func.setNum(9);
-                m_buf.saveToken(9);
-
+                clickNum(9);
             }
         });
 
@@ -225,10 +189,24 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_dispStr = "";
+                m_bZero = true;
+                m_dispStr = "0";
                 m_txtResult.setText(m_dispStr);
             }
         });
+    }
+
+    void clickNum(int num){
+        if(num == 0 && m_bZero){    //現在の計算値が0の時は0を表示させない
+            return;
+        }
+        if(num != 0 && m_bZero){
+            m_dispStr = ""; //最初から表示されてる0を消したいので一旦クリア
+            m_bZero = false;
+        }
+        showNum(num);
+        m_func.setNum(num);
+        m_buf.saveToken(num);
     }
 
     void showNum(int num){
