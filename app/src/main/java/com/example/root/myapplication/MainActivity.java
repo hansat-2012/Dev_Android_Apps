@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     private String m_dispStr; //リザルトバーに表示するようの文字列
 
     private boolean m_bZero;    //表示されている値が0
+    private boolean m_bDot; //計算式にdotが使われてるか。(dotは1つまで)
 
     // button action
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
         m_txtResult.setText("0");
         m_dispStr = "0";
         m_bZero = true;
+        m_bDot = false;
         // button0
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +180,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
+                if(m_bDot){
+                    return;
+                }
+                m_bDot = true;
+                if(m_bZero){    //TODO:計算に使うバッファの方でいきなりdotを押した時の処理とか考えなきゃいかんかも
+                    m_bZero = false;
+                }
+                m_dispStr += ".";
+                m_txtResult.setText(m_dispStr);
                 m_func.setCalc(5);
                 m_buf.saveToken(14);
                 //m_buf[m_buf.m_TokenLength]
@@ -190,6 +201,7 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 m_bZero = true;
+                m_bDot = false;
                 m_dispStr = "0";
                 m_txtResult.setText(m_dispStr);
             }
