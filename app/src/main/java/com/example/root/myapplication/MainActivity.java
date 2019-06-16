@@ -168,8 +168,8 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 m_func.setCalc(4);
                 m_buf.saveToken(17);
+                m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
                 m_buf.resetToken(); // Trigger of Reset m_buf
-//                m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
 
 
             }

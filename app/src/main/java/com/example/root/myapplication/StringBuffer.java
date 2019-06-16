@@ -17,14 +17,15 @@ public class StringBuffer {
     // Method:
     public void resetToken()
     {
-        m_StrIn = null;
+        m_StrIn  = new String[  BUF_TOKEN_SIZE  ] ;
         m_TokenNum = 0 ;
         m_flg_EndOfToken = 0;
  
 	}
     public void saveToken(int tmp_num)
     {
-		String tmp_Char  = "";
+
+		String tmp_Char  = "" ;
 
 		// get the present number of an array...
 		// m_StrIn.m_TokenLength = m_StrIn.length; 
@@ -42,14 +43,20 @@ public class StringBuffer {
             else if(tmp_num == 17) tmp_Char = "=";
             //else eUnknownInput = 1;
 
+            m_StrIn[ m_TokenNum ] = tmp_Str ;
+            m_StrIn[ m_TokenNum + 1 ] = tmp_Char ;
+
+            m_TokenNum +=2;
+            tmp_Str = "" ;
+
         }
         else
         {
             tmp_Char = String.valueOf( tmp_num ) ; //0 ~ 9
-
+            tmp_Str += tmp_Char;
         }
 
-        tmp_Str += tmp_Char;
+
 
         //
         if (tmp_Char == "=" ){
@@ -65,8 +72,9 @@ public class StringBuffer {
             tmp_Str = "" ;
             m_flg_EndOfToken = 0 ;
 
+
         }
-		
+
     }
 
 }

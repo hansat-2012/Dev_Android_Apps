@@ -9,22 +9,29 @@ public class Convert {
     char[] stack = new  char[ STACK_MAX ];
     int   stack_pointer = 0;
 
-    String convert(StringBuffer token ) {
-        int n;
+    List<String> convert(StringBuffer token ) {
+        int n=0,m=0;
+        int i = 0;
         String pToken = "" ;
-        String buffer = null ;        // 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
+        String[] buffer = new String[ STACK_MAX ] ;        // 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
         List<String> buffer_list = new ArrayList<String>();
 
 
         for (n = 0; n < token.m_TokenNum; n++) {
+
+            // 数字の場合
             if ( isdigit( token.m_StrIn[n] ) ) {
                 // 数値ならば、バッファに追加
-                buffer += token.m_StrIn[n];
+                buffer[m] = token.m_StrIn[n];
+                m++;
 
-            } else if ( token.m_StrIn[n] == ")") {
+            }
+
+            // 数字じゃない場合
+            else if ( token.m_StrIn[n] == ")") {
                 // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
                 while ( (pToken = pop() ) != "" && pToken != "(")
-                    buffer += pToken;
+                    buffer[n] = pToken;
 
                 if (pToken == "" ) error("'(' がない");
 
@@ -38,7 +45,7 @@ public class Convert {
                 while (peek() != "") {
                     if ( rank( token.m_StrIn[n] , peek() ) == 1 ) {
                         // 現在のトークンはスタック最上位のトークンより優先順位が低い
-                       buffer += pop();
+                       //buffer += pop();
                        buffer_list.add(pop());
 
                     } else {
@@ -51,13 +58,27 @@ public class Convert {
         }
 
         // スタックが空になるまでトークンを取り出し、バッファへ
-        while ( (pToken = pop()) != "") {
-            buffer += pToken;
+        while(  i < m ) {
+            buffer_list.add(buffer[i]);
+            i++;
         }
+        while ( (pToken = pop()) != "") {
+            if( pToken.equals("=") )
+            {
+                // do nothing
+                error("debug");
+            }
+            else {
+                buffer_list.add( pToken )    ;
+            }
+        }
+
         buffer = null;
-        return buffer ;
+        return buffer_list ;
 
     }
+
+    /********************************************************************************************/
 
     // 数字かどうか判定する
     boolean isdigit(String num) {
@@ -71,10 +92,20 @@ public class Convert {
 
     // push＝スタックに追加
     void push(String pToken) {
-        char[] tmp = pToken.toCharArray() ;
+        char[] tmp = new char[ 1 ] ;   // 演算子一つずつ扱うため要素数１
 
-        if (stack_pointer >= STACK_MAX) error("stack full");
-        stack[stack_pointer++] = tmp[0] ;
+        if( pToken == "")
+        {
+            // do nothing
+            error("debug");
+        }
+        else {
+            tmp = pToken.toCharArray();
+
+            if (stack_pointer >= STACK_MAX) error("stack full");
+            stack[stack_pointer++] = tmp[0];
+        }
+
     }
 
     // スタックから１トークン取り出す
