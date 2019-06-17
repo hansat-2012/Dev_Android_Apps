@@ -14,7 +14,7 @@ public class RpnCalculator {
 
         for (String token : rpn){
 
-            if( token == "+" || token == "-" || token == "*" || token == "/"){
+            if( token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")){
 
                 double b = RpnStack.pop();
                 double a = RpnStack.pop();
