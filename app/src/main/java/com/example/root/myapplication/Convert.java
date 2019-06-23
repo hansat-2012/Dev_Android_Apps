@@ -12,10 +12,9 @@ public class Convert {
     List<String> convert(StringBuffer token ) {
         int n=0,m=0;
         int i = 0;
-        String pToken = "" ;
-        String[] buffer = new String[ STACK_MAX ] ;        // 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
-        List<String> buffer_list = new ArrayList<String>();
 
+        String pToken = "" ;
+        List<String> buffer_list = new ArrayList<String>();// 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
 
         for (n = 0; n < token.m_TokenNum; n++) {
 
@@ -30,8 +29,13 @@ public class Convert {
 /*
             else if ( token.m_StrIn[n].equals(")")) {
                 // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
-                while ( (pToken = pop() ) != "" && pToken != "(")
-                    buffer[n] = pToken;
+                pToken = pop();
+                while ( !pToken.equals("") && !pToken.equals("(") ){
+                //while ( (pToken = pop() ) != "" && pToken != "(")
+                    buffer_list.add(token.m_StrIn[n]);
+                    pToken = pop();
+
+                }
 
                 if (pToken.equals( "") ) error("'(' がない");
 
@@ -72,7 +76,6 @@ public class Convert {
             }
         }
 
-        buffer = null;
         return buffer_list ;
 
     }
