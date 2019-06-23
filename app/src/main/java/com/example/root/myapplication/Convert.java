@@ -22,12 +22,12 @@ public class Convert {
             // 数字の場合
             if ( isdigit( token.m_StrIn[n] ) ) {
                 // 数値ならば、バッファに追加
-                buffer[m] = token.m_StrIn[n];
-                m++;
+                buffer_list.add(token.m_StrIn[n]);
 
             }
 
             // 数字じゃない場合
+/*
             else if ( token.m_StrIn[n].equals(")")) {
                 // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
                 while ( (pToken = pop() ) != "" && pToken != "(")
@@ -38,19 +38,22 @@ public class Convert {
             } else if ( token.m_StrIn[n].equals( "(" )) {
                 push( token.m_StrIn[n] );
 
-            } else if (peek().equals("")) {
+            }
+*/
+            else if (peek().equals("")) {
                 push( token.m_StrIn[n] );
 
             } else {
                 while (!peek().equals("")) {
-                    if ( rank( token.m_StrIn[n] , peek() ) == 1 ) {
+                    if ( rank( peek(), token.m_StrIn[n] ) == 1 ) {
                         // 現在のトークンはスタック最上位のトークンより優先順位が低い
-                       //buffer += pop();
-                       buffer_list.add(pop());
-
-                    } else {
+                        buffer_list.add(pop());
                         push( token.m_StrIn[n] );
                         break;
+
+                    } else {
+                       push( token.m_StrIn[n] );
+                       break;
 
                     }
                 }
@@ -58,10 +61,6 @@ public class Convert {
         }
 
         // スタックが空になるまでトークンを取り出し、バッファへ
-        while(  i < m ) {
-            buffer_list.add(buffer[i]);
-            i++;
-        }
         while ( !(pToken = pop()).equals("")) {
             if( pToken.equals("=") )
             {
