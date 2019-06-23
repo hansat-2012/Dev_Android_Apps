@@ -28,21 +28,21 @@ public class Convert {
             }
 
             // 数字じゃない場合
-            else if ( token.m_StrIn[n] == ")") {
+            else if ( token.m_StrIn[n].equals(")")) {
                 // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
                 while ( (pToken = pop() ) != "" && pToken != "(")
                     buffer[n] = pToken;
 
-                if (pToken == "" ) error("'(' がない");
+                if (pToken.equals( "") ) error("'(' がない");
 
-            } else if ( token.m_StrIn[n] == "(" ) {
+            } else if ( token.m_StrIn[n].equals( "(" )) {
                 push( token.m_StrIn[n] );
 
-            } else if (peek() == "") {
+            } else if (peek().equals("")) {
                 push( token.m_StrIn[n] );
 
             } else {
-                while (peek() != "") {
+                while (!peek().equals("")) {
                     if ( rank( token.m_StrIn[n] , peek() ) == 1 ) {
                         // 現在のトークンはスタック最上位のトークンより優先順位が低い
                        //buffer += pop();
@@ -62,7 +62,7 @@ public class Convert {
             buffer_list.add(buffer[i]);
             i++;
         }
-        while ( (pToken = pop()) != "") {
+        while ( !(pToken = pop()).equals("")) {
             if( pToken.equals("=") )
             {
                 // do nothing
@@ -94,7 +94,7 @@ public class Convert {
     void push(String pToken) {
         char[] tmp = new char[ 1 ] ;   // 演算子一つずつ扱うため要素数１
 
-        if( pToken == "")
+        if( pToken.equals(""))
         {
             // do nothing
             error("debug");
@@ -123,13 +123,13 @@ public class Convert {
         int a = 0;
         int b = 0;
 
-        if (op_a == "(" || op_a == ")") a = 1;
-        if (op_a == "*" || op_a == "/" || op_a == "%") a = 4;
-        if (op_a == "+" || op_a == "-") a = 5;
+        if (op_a.equals("(") || op_a.equals(")")) a = 1;
+        if (op_a.equals("*") || op_a.equals("/") || op_a.equals( "%")) a = 4;
+        if (op_a.equals("+") || op_a.equals("-")) a = 5;
 
-        if (op_b == "(" || op_b == ")") b = 1;
-        if (op_b == "*" || op_b == "/" || op_b == "%") b = 4;
-        if (op_b == "+" || op_b == "-") b = 5;
+        if (op_b.equals("(") || op_b.equals(")")) b = 1;
+        if (op_b.equals("*") || op_b.equals("/") || op_b.equals( "%")) b = 4;
+        if (op_b.equals("+") || op_b.equals("-")) b = 5;
 
         return (a < b )? 1: 0;
     }
