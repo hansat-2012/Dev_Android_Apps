@@ -11,12 +11,12 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
     // Instance
-    private Function m_func;
     private StringBuffer m_buf ;
     private Convert m_inputtoken ;
     private RpnCalculator m_convertedtoken ;
     private TextView m_txtResult;
     private String m_dispStr; //リザルトバーに表示するようの文字列
+    private boolean m_bCalcLast = false;     //直近の入力が演算式である
 
     private boolean m_bZero;    //表示されている値が0
     private boolean m_bDot; //計算式にdotが使われてるか。(dotは1つまで)
@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-        m_func = new Function();
         m_buf = new StringBuffer();
         m_inputtoken = new Convert();
         m_convertedtoken = new RpnCalculator();
@@ -121,7 +120,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_func.setCalc(0);
+                setCalc(0);
                 m_buf.saveToken(10);
 
             }
@@ -132,7 +131,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_func.setCalc(1);
+                setCalc(1);
                 m_buf.saveToken(11);
 
             }
@@ -143,7 +142,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_func.setCalc(2);
+                setCalc(2);
                 m_buf.saveToken(12);
 
             }
@@ -154,7 +153,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_func.setCalc(3);
+                setCalc(3);
                 m_buf.saveToken(13);
 
             }
@@ -166,7 +165,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                m_func.setCalc(4);
+                setCalc(4);
                 m_buf.saveToken(17);
                 m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
                 m_buf.resetToken(); // Trigger of Reset m_buf
@@ -189,7 +188,7 @@ public class MainActivity extends Activity {
                 }
                 m_dispStr += ".";
                 m_txtResult.setText(m_dispStr);
-                m_func.setCalc(5);
+                setCalc(5);
                 m_buf.saveToken(14);
                 //m_buf[m_buf.m_TokenLength]
             }
@@ -220,13 +219,57 @@ public class MainActivity extends Activity {
             return; //字数制限。ひとまず9桁まで
         }
         showNum(num);
-        m_func.setNum(num);
         m_buf.saveToken(num);
+        m_bCalcLast = false;
     }
 
     void showNum(int num){
         m_dispStr += String.valueOf(num);
         m_txtResult.setText(m_dispStr);
+    }
+    /*
+     * 0 : +
+     * 1 : -
+     * 2 : *
+     * 3 : /
+     * 4 : =
+     * 5 : .
+     */
+    public void setCalc(int calc) {
+        if(calc < 0 || 5 < calc) {
+            return;
+        }
+        //TODO:演算子が２回続いた場合は更新する
+        if(m_bCalcLast) {
+            m_dispStr = m_dispStr.substring(0,m_dispStr.length()-1);
+        }
+
+        char c;
+        switch(calc) {
+            case 0:
+                c = '+';
+                break;
+            case 1:
+                c = '-';
+                break;
+            case 2:
+                c = '*';
+                break;
+            case 3:
+                c = '/';
+                break;
+            case 4:
+                c = '=';
+                break;
+            case 5:
+                c = '.';
+                break;
+            default:
+                return;
+        }
+        m_dispStr += c;
+        m_txtResult.setText(m_dispStr);
+        m_bCalcLast = true;
     }
 }
 
