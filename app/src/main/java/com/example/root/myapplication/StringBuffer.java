@@ -43,15 +43,20 @@ public class StringBuffer {
             else if(tmp_num == 17) tmp_Char = "=";
             //else eUnknownInput = 1;
 
-            m_StrIn[ m_TokenNum ] = tmp_Str ;
-            m_StrIn[ m_TokenNum + 1 ] = tmp_Char ;
-
-            m_TokenNum +=2;
+            if(m_TokenNum == 0){    //最初は問答無用でバッファに突っ込む
+                m_StrIn[m_TokenNum++] = tmp_Str;
+                m_StrIn[m_TokenNum++] = tmp_Char;
+            }else {
+                int tokennum = m_TokenNum - 1;
+                if (tmp_Str.equals("") && ((m_StrIn[tokennum].equals("+")) || (m_StrIn[tokennum].equals("-")) || m_StrIn[tokennum].equals("*") || m_StrIn[tokennum].equals("/") || m_StrIn[tokennum].equals(".") || m_StrIn[tokennum].equals("="))) {
+                    m_StrIn[tokennum] = tmp_Char; //演算子が連続で入力された場合はを入れ直す
+                } else {
+                    m_StrIn[m_TokenNum++] = tmp_Str;    //ソースコードが重複してるのでできれば修正
+                    m_StrIn[m_TokenNum++] = tmp_Char;
+                }
+            }
             tmp_Str = "" ;
-
-        }
-        else
-        {
+        } else {
             tmp_Char = String.valueOf( tmp_num ) ; //0 ~ 9
             tmp_Str += tmp_Char;
         }
