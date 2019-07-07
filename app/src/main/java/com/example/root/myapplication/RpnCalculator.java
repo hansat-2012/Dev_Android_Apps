@@ -9,6 +9,7 @@ public class RpnCalculator {
     public String execute(List<String> rpn){
 
         //System.out.println("--- start RpnCalculator ---");
+        if(rpn.isEmpty()) return "";
 
         Deque<Double> RpnStack = new ArrayDeque<>();
 
