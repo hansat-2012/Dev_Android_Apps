@@ -10,25 +10,34 @@ public class Convert {
     int   stack_pointer = 0;
 
     List<String> convert(StringBuffer token ) {
-        int n=0,m=0;
+        int n = 0, m = 0;
         int i = 0;
 
         String pToken = "" ;
-        List<String> buffer_list = new ArrayList<String>();// 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
+        List<String> buffer_list = new ArrayList<String>()  ;       // 並び替えたトークンを格納するバッファ。括弧"(", ")" は除くため、元の式に括弧があればその分長さは短くなる。
 
         for (n = 0; n < token.m_TokenNum; n++) {
 
-            // 数字の場合
-            if ( isdigit( token.m_StrIn[n] ) ) {
+            // もう文字が無い
+            if ( token.m_StrIn[n].equals("") ) {
+                break;
+            }
+
+            /* 数字の場合 ===============================================================*/
+            else if ( isdigit( token.m_StrIn[n] ) ) {
                 // 数値ならば、バッファに追加
                 buffer_list.add(token.m_StrIn[n]);
 
             }
 
-            // 数字じゃない場合
+            /* 数字じゃない場合 ===============================================================*/
 /*
+            // トークンは')'か？
             else if ( token.m_StrIn[n].equals(")")) {
-                // '('までスタックからポップし、バッファへ. '(' と ')' は捨てる.
+
+                // '('がある場合
+                // *** '('までスタックからポップし、バッファへ.
+				// *** '(' と ')' は捨てる.
                 pToken = pop();
                 while ( !pToken.equals("") && !pToken.equals("(") ){
                 //while ( (pToken = pop() ) != "" && pToken != "(")
@@ -37,43 +46,72 @@ public class Convert {
 
                 }
 
+                // '('がない場合
                 if (pToken.equals( "") ) error("'(' がない");
 
-            } else if ( token.m_StrIn[n].equals( "(" )) {
-                push( token.m_StrIn[n] );
+            }
+
+            // トークンは'('か？
+            else if ( token.m_StrIn[n].equals( "(" )) {
+
+                push( token.m_StrIn[n] );// トークンをスタックに追加
 
             }
 */
-            else if (peek().equals("")) {
-                push( token.m_StrIn[n] );
 
-            } else {
-                while (!peek().equals("")) {
-                    if ( rank( peek(), token.m_StrIn[n] ) == 1 ) {
-                        // 現在のトークンはスタック最上位のトークンより優先順位が低い
-                        buffer_list.add(pop());
-                        push( token.m_StrIn[n] );
-                        break;
+            // その他（演算子処理）
+            else {
 
-                    } else {
-                       push( token.m_StrIn[n] );
-                       break;
+                if (peek().equals("")) {  // スタックは空か
+                    push(token.m_StrIn[n]);
+                }
+
+                // スタックは空ではない
+                else
+                {
+
+                    // スタックが空になるまで、もしくはトークンより低順位の演算子にめぐりあうまで以下を繰り返す
+                    while (!peek().equals("") & !peek().equals("=") ) {
+                        if (rank(peek(), token.m_StrIn[n]) == 1) { // 現在のトークンはスタック最上位のトークンより優先して演算されるべき
+
+                            buffer_list.add(pop());
+
+                        }
+                        else {
+                            break;
+                        }
 
                     }
+
+                    // スタックが空になった場合、トークンを追加して終了する
+                    push(token.m_StrIn[n]);
+
                 }
+
+
             }
         }
 
         // スタックが空になるまでトークンを取り出し、バッファへ
-        while ( !(pToken = pop()).equals("")) {
-            if( pToken.equals("=") )
+        //while ( !(pToken = pop()).equals(""))
+        n = 0 ;
+        while ( n < stack.length   )
+        {
+
+            pToken = pop()  ;
+            if( pToken.equals("") ){
+                break;
+            }
+            else if( pToken.equals("=")  )
             {
-                // do nothing
-                error("debug");
+
             }
-            else {
-                buffer_list.add( pToken )    ;
+            else
+            {
+                buffer_list.add( pToken )     ;
             }
+
+            n++ ;
         }
 
         return buffer_list ;
@@ -112,7 +150,12 @@ public class Convert {
 
     // スタックから１トークン取り出す
     String pop() {
-        return stack_pointer > 0 ? String.valueOf(stack[--stack_pointer]) : "" ;
+        String a;
+
+        a = stack_pointer > 0 ? String.valueOf(stack[--stack_pointer]) : "";
+        stack[stack_pointer] = ' ' ;
+
+        return a ;
     }
 
     // 最後にスタックに入ったトークンを返す
