@@ -25,6 +25,7 @@ public class Convert {
 
             /* 数字の場合 ===============================================================*/
             else if ( isdigit( token.m_StrIn[n] ) ) {
+
                 // 数値ならば、バッファに追加
                 buffer_list.add(token.m_StrIn[n]);
 
@@ -123,7 +124,8 @@ public class Convert {
     // 数字かどうか判定する
     boolean isdigit(String num) {
         try {
-            Integer.parseInt(num);
+            Double.parseDouble(num);
+            //Integer.parseInt(num);
             return true;
         } catch (NumberFormatException e) {
             return false;
