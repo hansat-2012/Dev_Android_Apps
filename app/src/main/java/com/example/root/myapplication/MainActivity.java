@@ -215,7 +215,7 @@ public class MainActivity extends Activity {
             m_dispStr = ""; //最初から表示されてる0を消したいので一旦クリア
             m_bZero = false;
         }
-        if(10 < m_dispStr.length()) {
+        if(16 < m_dispStr.length()) {
             return; //字数制限。ひとまず9桁まで
         }
         showNum(num);
