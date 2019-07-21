@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import java.util.List;
 
 /*test*/
 
@@ -168,9 +169,13 @@ public class MainActivity extends Activity {
                 setCalc(4);
                 m_buf.saveToken(17);
                 m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
+                Convert e_con = new Convert();
+                List<String> st_con = e_con.convert(m_buf);
                 m_buf.resetToken(); // Trigger of Reset m_buf
-
-
+                RpnCalculator e_rpn = new RpnCalculator();
+                String e_result = e_rpn.execute(st_con);
+                TextView result = findViewById(R.id.txt_result);
+                result.setText(e_result);
             }
         });
 
