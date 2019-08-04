@@ -58,20 +58,24 @@ public class StringBuffer {
                     m_StrIn[m_TokenNum++] = tmp_Char;
                 }
             }
+
             tmp_Str = "" ;
+            m_bDotUsed = false ;
+
         } else {
 
-            if( m_bDotUsed && tmp_num == 14 ){
+            if( m_bDotUsed && tmp_num == 14 ){  //項のなかで2回以上小数点が押された場合
 
-                return ;
+                return ;    //　何もしない
             }
 
             // tmc_Char 決定
             if( tmp_num  == 14 )
             {
-                int tokennum = m_TokenNum - 1;
-                if (tmp_Str.equals("") && ((m_StrIn[tokennum].equals("+")) || (m_StrIn[tokennum].equals("-")) || m_StrIn[tokennum].equals("*") || m_StrIn[tokennum].equals("/") || m_StrIn[tokennum].equals(".") || m_StrIn[tokennum].equals("="))) {
-                    tmp_Char  = "0."; //演算子が連続で入力された場合
+                int tokennum = m_TokenNum ;
+                if (tmp_Str.equals("") || ( m_StrIn[tokennum].equals("") ) )
+                {
+                    tmp_Char  = "0."; //演算子がトークンの先頭で入力された場合
                 }
                 else{
                     tmp_Char = "."  ;
@@ -99,8 +103,8 @@ public class StringBuffer {
         {
 			m_StrIn[ m_TokenNum ] = tmp_Str ;
             m_TokenNum ++;
-            m_bDotUsed = false ;
             tmp_Str = "" ;
+            m_bDotUsed = false ;
             m_flg_EndOfToken = 0 ;
 
 
