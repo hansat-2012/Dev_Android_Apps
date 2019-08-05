@@ -123,6 +123,7 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 setCalc(0);
                 m_buf.saveToken(10);
+                m_bDot = false;
 
             }
         });
@@ -134,6 +135,7 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 setCalc(1);
                 m_buf.saveToken(11);
+                m_bDot = false;
 
             }
         });
@@ -145,6 +147,7 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 setCalc(2);
                 m_buf.saveToken(12);
+                m_bDot = false;
 
             }
         });
@@ -156,6 +159,7 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 setCalc(3);
                 m_buf.saveToken(13);
+                m_bDot = false;
 
             }
         });
@@ -167,6 +171,7 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 setCalc(4);
+                m_bDot = false;
                 m_buf.saveToken(17);
                 m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
                 Convert e_con = new Convert();
