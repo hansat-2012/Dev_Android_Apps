@@ -196,8 +196,6 @@ public class MainActivity extends Activity {
                 if(m_bZero){    //TODO:計算に使うバッファの方でいきなりdotを押した時の処理とか考えなきゃいかんかも
                     m_bZero = false;
                 }
-                m_dispStr += ".";
-                m_txtResult.setText(m_dispStr);
                 setCalc(5);
                 m_buf.saveToken(14);
                 //m_buf[m_buf.m_TokenLength]
