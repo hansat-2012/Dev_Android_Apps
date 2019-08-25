@@ -73,12 +73,12 @@ public class StringBuffer {
             if( tmp_num  == 14 )
             {
                 int tokennum = m_TokenNum ;
-                if (tmp_Str.equals("") || ( m_StrIn[tokennum].equals("") ) )
+                if (tmp_Str.equals(""))
                 {
                     tmp_Char  = "0."; //演算子がトークンの先頭で入力された場合
                 }
                 else{
-                    tmp_Char = "."  ;
+                    tmp_Char = ".";
                 }
                 m_bDotUsed = true ;
 
