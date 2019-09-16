@@ -1,5 +1,6 @@
 package com.example.root.myapplication;
 
+import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
@@ -11,56 +12,56 @@ public class RpnCalculator {
         //System.out.println("--- start RpnCalculator ---");
         if(rpn.isEmpty()) return "";
 
-        Deque<Double> RpnStack = new ArrayDeque<>();
+        Deque<String> RpnStack = new ArrayDeque<>();
 
         for (String token : rpn){
 
             if( token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")){
 
-                double b = RpnStack.pop();
-                double a = RpnStack.pop();
+                BigDecimal b = new BigDecimal(RpnStack.pop());
+                BigDecimal a = new BigDecimal(RpnStack.pop());
                 //System.out.println("a = "+ a + ", b = "+ b + ", token = " + token );
-                double tmp = calculate(a, b, token);
+                String tmp = calculate(a, b, token);
 
                 RpnStack.push(tmp);
 
             }else{
-                RpnStack.push(Double.valueOf(token));
+                RpnStack.push(token);
             }
         }
 
         //System.out.println("--- end RpnCalculator ---");
-        return RpnStack.pop().toString();
+        return RpnStack.pop();
     }
 
-    public double calculate (double a, double b, String token){
+    public String calculate (BigDecimal a, BigDecimal b, String token){
         //System.out.println("--- start exeCalc ---");
 
-        double result = 0;
+        BigDecimal result = new BigDecimal(0);
 
         switch(token){
             case "+":
                 System.out.println(a + " + " + b);
-                result = a + b ;
+                result = a.add(b);
                 break;
             case "-":
                 System.out.println(a + " - "  + b);
-                result = a - b;
+                result = a.subtract(b);
                 break;
             case "*":
                 System.out.println(a + " * " + b);
-                result = a * b;
+                result = a.multiply(b);
                 break;
             case "/":
                 System.out.println(a + " / " + b);
-                result = a / b;
+                result = a.divide(b, 3, BigDecimal.ROUND_HALF_UP);
                 break;
             default:
 
         }
 
         //System.out.println("--- end exeCalc ---");
-        return result;
+        return result.stripTrailingZeros().toString();
 
     }
 
