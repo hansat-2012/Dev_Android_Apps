@@ -210,6 +210,7 @@ public class MainActivity extends Activity {
                 m_bZero = true;
                 m_bDot = false;
                 m_dispStr = "0";
+                m_buf = new StringBuffer();
                 m_txtResult.setText(m_dispStr);
             }
         });
