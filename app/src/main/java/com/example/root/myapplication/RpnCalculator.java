@@ -61,7 +61,7 @@ public class RpnCalculator {
         }
 
         //System.out.println("--- end exeCalc ---");
-        return result.stripTrailingZeros().toString();
+        return result.stripTrailingZeros().toPlainString();
 
     }
 
