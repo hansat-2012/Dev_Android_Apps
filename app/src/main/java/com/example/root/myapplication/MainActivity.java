@@ -176,7 +176,10 @@ public class MainActivity extends Activity {
                 m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
                 Convert e_con = new Convert();
                 List<String> st_con = e_con.convert(m_buf);
-                m_buf.resetToken(); // Trigger of Reset m_buf
+                m_buf = new StringBuffer();
+                m_bZero = false;
+                m_dispStr = "0";
+                m_bCalcLast = false;
                 RpnCalculator e_rpn = new RpnCalculator();
                 String e_result = e_rpn.execute(st_con);
                 TextView result = findViewById(R.id.txt_result);
@@ -276,6 +279,7 @@ public class MainActivity extends Activity {
             default:
                 return;
         }
+        m_bZero = false;
         m_dispStr += c;
         m_txtResult.setText(m_dispStr);
         m_bCalcLast = true;
