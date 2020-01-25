@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
     private TextView m_txtResult;
     private String m_dispStr; //リザルトバーに表示するようの文字列
     private boolean m_bCalcLast = false;     //直近の入力が演算式である
+    public  boolean m_bInput_active = false ;   //計算式の入力中である
+    private String e_result ;   // functionバーの表示内容を保存
 
     private boolean m_bZero;    //表示されている値が0
     private boolean m_bDot; //計算式にdotが使われてるか。(dotは1つまで)
@@ -36,11 +38,20 @@ public class MainActivity extends Activity {
         m_dispStr = "0";
         m_bZero = true;
         m_bDot = false;
+
+
         // button0
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                clickNum(0);
+                if( e_result == "0") {
+                    // Do Nothing
+
+                }else{
+                    m_bInput_active = true ;
+                    clickNum(0);
+
+                }
             }
         });
 
@@ -48,6 +59,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(1);
             }
         });
@@ -56,6 +68,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(2);
             }
         });
@@ -64,6 +77,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(3);
             }
         });
@@ -72,6 +86,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(4);
             }
         });
@@ -80,6 +95,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(5);
             }
         });
@@ -88,6 +104,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(6);
             }
         });
@@ -96,6 +113,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(7);
             }
         });
@@ -104,6 +122,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(8);
             }
         });
@@ -112,6 +131,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
+                m_bInput_active = true ;
                 clickNum(9);
             }
         });
@@ -166,24 +186,45 @@ public class MainActivity extends Activity {
 
 
         // button_equ
+        // 1 無入力状態
+        // →表示が変わらないようにしたい（＝が押されたことを無視したい）
+        // 2 演算子のみ（　”＝”以外）
+        // →１と同じ
+        // 3 数字＋演算子（　演算子を最後に入力している状態）
+        // →１と同じ
+        // 4 数字＋演算子＋数字
+        // →演算処理実施
         findViewById(R.id.button_equ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
                 // クリック時の処理
-                setCalc(4);
-                m_bDot = false;
-                m_buf.saveToken(17);
-                m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
-                Convert e_con = new Convert();
-                List<String> st_con = e_con.convert(m_buf);
-                m_buf = new StringBuffer();
-                m_bZero = false;
-                m_dispStr = "0";
-                m_bCalcLast = false;
-                RpnCalculator e_rpn = new RpnCalculator();
-                String e_result = e_rpn.execute(st_con);
-                TextView result = findViewById(R.id.txt_result);
-                result.setText(e_result);
+                //　stat:１－３
+                if( !m_bInput_active ){
+                    // Do Nothing
+                }
+                else{
+
+                    setCalc(4);
+                    m_bDot = false;
+                    m_buf.saveToken(17);
+                    m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
+                    Convert e_con = new Convert();
+                    List<String> st_con = e_con.convert(m_buf);
+                    m_buf = new StringBuffer();
+                    m_bZero = false;
+                    m_dispStr = "0";
+                    m_bCalcLast = false;
+                    RpnCalculator e_rpn = new RpnCalculator();
+
+                    e_result = e_result = e_rpn.execute(st_con);
+                    TextView result = findViewById(R.id.txt_result);
+                    result.setText(e_result);
+
+                    m_bInput_active = false ;
+
+
+                }
+
             }
         });
 
@@ -215,6 +256,7 @@ public class MainActivity extends Activity {
                 m_dispStr = "0";
                 m_buf = new StringBuffer();
                 m_txtResult.setText(m_dispStr);
+                m_bInput_active = false ;
             }
         });
     }

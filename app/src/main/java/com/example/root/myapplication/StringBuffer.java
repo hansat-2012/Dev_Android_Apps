@@ -9,13 +9,15 @@ public class StringBuffer {
     static int BUF_TOKEN_SIZE = 100 ;     // Function欄の最大文字数を20文字とする
 
     // Member:
-    public String[] m_StrIn = new String[  BUF_TOKEN_SIZE  ] ;        // Input token
-    public int m_TokenNum = 0 ;        // Input number of tokenes
+    public String tmp_Str = "" ;    //単項の作成
+    public String[] m_StrIn = new String[  BUF_TOKEN_SIZE  ] ; //各要素に単項と演算子を一つずつ格納
+    public int m_TokenNum = 0 ;        // 配列の要素数
     public int m_flg_EndOfToken ;   // Token Period
-    public String tmp_Str = "" ;
     private boolean m_bDotUsed = false ;
 	
     // Method:
+
+    //トークンのリセット
     public void resetToken()
     {
         m_StrIn  = new String[  BUF_TOKEN_SIZE  ] ;
@@ -23,19 +25,19 @@ public class StringBuffer {
         m_flg_EndOfToken = 0;
  
 	}
+
+	// トークンの保存
     public void saveToken(int tmp_num)
     {
 
 		String tmp_Char  = "" ;
 
-		// get the present number of an array...
-		// m_StrIn.m_TokenLength = m_StrIn.length; 
-		// m_StrLength = m_StrIn[0].length(); 
-
-		// generate a token ※符号から始まる数字のトークン化は未実装
+		//演算子が入力された場合
+        // *** 演算子を要素に入力する
         if( tmp_num >= 10 && tmp_num != 14)
         {
 
+            // 代数→演算子変換
             if(tmp_num == 10) tmp_Char = "+" ;
             else if(tmp_num == 11) tmp_Char = "-" ;
             else if(tmp_num == 12) tmp_Char = "*" ;
@@ -45,9 +47,20 @@ public class StringBuffer {
             else if(tmp_num == 17) tmp_Char = "=";
             //else eUnknownInput = 1;
 
+            //演算子の保存（要素に代入）
+            //識別子？のインクリメント
             if(m_TokenNum == 0){    //最初は問答無用でバッファに突っ込む
-                m_StrIn[m_TokenNum++] = tmp_Str;
+                // 単項の保存
+                if( /*MainActivity.m_bInput_active== */true){
+                    m_StrIn[m_TokenNum++] = "0" ;
+                }
+                else {
+                    m_StrIn[m_TokenNum++] = tmp_Str;
+                }
+
+                // 演算子の保存
                 m_StrIn[m_TokenNum++] = tmp_Char;
+
             }else {
 
                 int tokennum = m_TokenNum - 1;
