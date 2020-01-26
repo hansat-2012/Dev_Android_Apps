@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
     private TextView m_txtResult;
     private String m_dispStr; //リザルトバーに表示するようの文字列
     private boolean m_bCalcLast = false;     //直近の入力が演算式である
-    public  boolean m_bInput_active = false ;   //計算式の入力中である
+    //public  boolean m_bInput_active = false ;   //計算式の入力中である
     private String e_result ;   // functionバーの表示内容を保存
 
     private boolean m_bZero;    //表示されている値が0
@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
         m_inputtoken = new Convert();
         m_convertedtoken = new RpnCalculator();
         m_txtResult = findViewById(R.id.txt_result);
-        m_txtResult.setText("0");
         m_dispStr = "0";
+        m_txtResult.setText( m_dispStr );
         m_bZero = true;
         m_bDot = false;
 
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
                     // Do Nothing
 
                 }else{
-                    m_bInput_active = true ;
+                    //m_buf.m_bInput_active = true ;
                     clickNum(0);
 
                 }
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(1);
             }
         });
@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(2);
             }
         });
@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(3);
             }
         });
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(4);
             }
         });
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(5);
             }
         });
@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(6);
             }
         });
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(7);
             }
         });
@@ -122,7 +122,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(8);
             }
         });
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                m_bInput_active = true ;
+                m_buf.m_bInput_active = true ;
                 clickNum(9);
             }
         });
@@ -199,7 +199,7 @@ public class MainActivity extends Activity {
             public void onClick(View n) {
                 // クリック時の処理
                 //　stat:１－３
-                if( !m_bInput_active ){
+                if( !m_buf.m_bInput_active ){
                     // Do Nothing
                 }
                 else{
@@ -208,19 +208,22 @@ public class MainActivity extends Activity {
                     m_bDot = false;
                     m_buf.saveToken(17);
                     m_convertedtoken.execute( m_inputtoken.convert( m_buf ) ) ;
+
                     Convert e_con = new Convert();
                     List<String> st_con = e_con.convert(m_buf);
+                    RpnCalculator e_rpn = new RpnCalculator();
+
+                    //表示を更新　計算式→計算結果
+                    e_result = e_rpn.execute(st_con);
+                    m_dispStr = e_result ;
+                    m_txtResult.setText( m_dispStr );
+
+                    //次期計算式記入開始に備えバッファの初期化
                     m_buf = new StringBuffer();
                     m_bZero = false;
                     m_dispStr = "0";
                     m_bCalcLast = false;
-                    RpnCalculator e_rpn = new RpnCalculator();
-
-                    e_result = e_result = e_rpn.execute(st_con);
-                    TextView result = findViewById(R.id.txt_result);
-                    result.setText(e_result);
-
-                    m_bInput_active = false ;
+                    m_buf.m_Str_DispLatest = e_result ; // 表示中の値を保存
 
 
                 }
@@ -253,10 +256,11 @@ public class MainActivity extends Activity {
                 // クリック時の処理
                 m_bZero = true;
                 m_bDot = false;
-                m_dispStr = "0";
+                m_dispStr = "0" ;
+                e_result = "0" ;
                 m_buf = new StringBuffer();
                 m_txtResult.setText(m_dispStr);
-                m_bInput_active = false ;
+                m_buf.m_bInput_active = false ;
             }
         });
     }
