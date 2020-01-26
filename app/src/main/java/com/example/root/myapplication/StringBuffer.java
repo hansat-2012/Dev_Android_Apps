@@ -66,6 +66,7 @@ public class StringBuffer {
             else if(tmp_num == 13) tmp_Char = "/" ;
                 //else if(tmp_num == 14) tmp_Char = "." ;
             else if(tmp_num == 15) tmp_Char = "(";
+            else if(tmp_num == 16) tmp_Char = ")";
             else if(tmp_num == 17) tmp_Char = "=";
             //else eUnknownInput = 1;
 
@@ -73,8 +74,9 @@ public class StringBuffer {
             //識別子？のインクリメント
             if(m_TokenNum == 0){    //最初は問答無用でバッファに突っ込む
                 // 単項の保存
-                if( !m_bInput_active== true){
-                    m_StrIn[m_TokenNum++] = "0" ;
+                if( !m_bInput_active ){
+                    //m_StrIn[m_TokenNum++] = "0" ;
+                    m_StrIn[m_TokenNum++] = m_Str_DispLatest ;
                 }
                 else {
                     m_StrIn[m_TokenNum++] = tmp_Str;

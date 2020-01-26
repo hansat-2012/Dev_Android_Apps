@@ -18,7 +18,6 @@ public class MainActivity extends Activity {
     private TextView m_txtResult;
     private String m_dispStr; //リザルトバーに表示するようの文字列
     private boolean m_bCalcLast = false;     //直近の入力が演算式である
-    //public  boolean m_bInput_active = false ;   //計算式の入力中である
     private String e_result ;   // functionバーの表示内容を保存
 
     private boolean m_bZero;    //表示されている値が0
@@ -224,6 +223,7 @@ public class MainActivity extends Activity {
                     m_dispStr = "0";
                     m_bCalcLast = false;
                     m_buf.m_Str_DispLatest = e_result ; // 表示中の値を保存
+                    m_dispStr = m_buf.m_Str_DispLatest;
 
 
                 }
@@ -325,10 +325,11 @@ public class MainActivity extends Activity {
             default:
                 return;
         }
-        m_bZero = false;
+
         m_dispStr += c;
         m_txtResult.setText(m_dispStr);
         m_bCalcLast = true;
+        m_bZero = false;
     }
 }
 
