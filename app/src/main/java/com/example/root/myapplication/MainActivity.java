@@ -13,15 +13,16 @@ public class MainActivity extends Activity {
 
     // Instance
     private StringBuffer m_buf ;
+    private String m_dispStr; //リザルトバーに表示するようの文字列
+    private String e_result ;   // functionバーの表示内容を保存
     private Convert m_inputtoken ;
     private RpnCalculator m_convertedtoken ;
     private TextView m_txtResult;
-    private String m_dispStr; //リザルトバーに表示するようの文字列
-    private boolean m_bCalcLast = false;     //直近の入力が演算式である
-    private String e_result ;   // functionバーの表示内容を保存
 
-    private boolean m_bZero;    //表示されている値が0
-    private boolean m_bDot; //計算式にdotが使われてるか。(dotは1つまで)
+    private boolean m_bCalcLast = false ;   //直近の入力が演算式である
+    private boolean m_bZero             ;   //表示されている値が0
+    private boolean m_bDot              ;   //計算式にdotが使われてるか。(dotは1つまで)
+    private boolean m_bDispRes = true    ;   //計算結果表示中かどうか
 
     // button action
     @Override
@@ -43,14 +44,17 @@ public class MainActivity extends Activity {
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View n) {
-                if( e_result == "0") {
-                    // Do Nothing
+
+                m_buf.m_bInput_active = true ;
+
+                if( m_buf.tmp_Str.equals("0")  ){    //現在の計算値が0の時は0を表示させない
 
                 }else{
-                    //m_buf.m_bInput_active = true ;
                     clickNum(0);
 
                 }
+
+
             }
         });
 
@@ -220,9 +224,10 @@ public class MainActivity extends Activity {
                     //次期計算式記入開始に備えバッファの初期化
                     m_buf = new StringBuffer();
                     m_bZero = false;
-                    m_dispStr = "0";
                     m_bCalcLast = false;
+                    m_bDispRes  = true ;
                     m_buf.m_Str_DispLatest = e_result ; // 表示中の値を保存
+                    //m_dispStr = "0";
                     m_dispStr = m_buf.m_Str_DispLatest;
 
 
@@ -261,30 +266,50 @@ public class MainActivity extends Activity {
                 m_buf = new StringBuffer();
                 m_txtResult.setText(m_dispStr);
                 m_buf.m_bInput_active = false ;
+                m_bDispRes  = true ;
             }
         });
     }
 
+    /*** Function Parts ***/
+    /* 数字クリック時の動作 */
     void clickNum(int num){
-        if(num == 0 && m_bZero){    //現在の計算値が0の時は0を表示させない
-            return;
-        }
-        if(num != 0 && m_bZero){
+
+        //計算結果表示中に数字が押された場合　→新規に計算式の入力を受け付ける
+        if(m_bDispRes  ){
+
             m_dispStr = ""; //最初から表示されてる0を消したいので一旦クリア
-            m_bZero = false;
+
+        }else{
+
+            if( m_buf.tmp_Str.equals("0") ){    //現在の計算値が0の時は0を表示させない
+                m_buf.tmp_Str = ""; //最初から表示されてる0を消したいので一旦クリア
+                m_dispStr = "" ;
+            }
+
         }
+
+        m_bZero = false;
+
+        //字数制限（ひとまず9桁まで）
         if(16 < m_dispStr.length()) {
-            return; //字数制限。ひとまず9桁まで
+            return; //指定桁数を超える入力は演算（も表示も？）しない
         }
+
         showNum(num);
         m_buf.saveToken(num);
         m_bCalcLast = false;
+        m_bDispRes  = false;
+
     }
 
+    /* 数字表示処理 */
     void showNum(int num){
         m_dispStr += String.valueOf(num);
         m_txtResult.setText(m_dispStr);
     }
+
+    /* 演算子クリック時の処理 */
     /*
      * 0 : +
      * 1 : -
@@ -294,9 +319,17 @@ public class MainActivity extends Activity {
      * 5 : .
      */
     public void setCalc(int calc) {
+
         if(calc < 0 || 5 < calc) {
             return;
         }
+
+        if( m_dispStr.equals("0") ){
+            m_buf.m_bInput_active = true ;
+            clickNum(0) ;
+
+        }
+
         //TODO:演算子が２回続いた場合は更新する
         if(m_bCalcLast) {
             m_dispStr = m_dispStr.substring(0,m_dispStr.length()-1);
@@ -330,6 +363,8 @@ public class MainActivity extends Activity {
         m_txtResult.setText(m_dispStr);
         m_bCalcLast = true;
         m_bZero = false;
+        m_bDispRes  = false;
+
     }
 }
 
